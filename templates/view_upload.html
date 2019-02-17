@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Eye Aberrations app</title>
+  </head>
+  <body>
+    <header>
+      <h1>Wavefront Aberrations of the Eye</h1>
+    </header>
+
+    <div class="WaveMap+PSF">
+      <h3>Introduction:</h3>
+      <table>
+        <tr>
+
+          <td>
+            <form method=post action="" enctype="multipart/form-data">
+              <table>
+                <tr>
+                  <td>{{ form["intro"].filename.label }}</td>
+                  <td>{{ form["intro"].filename(size=20) }}</td>
+                </tr>
+                <tr>
+                  <td>{{ form["intro"].defocus.label }}</td>
+                  <td>{{ form["intro"].defocus(size=4) }}</td>
+                </tr>
+                <tr>
+                  <td>{{ form["intro"].astigmatism_1.label }}</td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td>{{ form["intro"].astigmatism_1(size=4) }}</td>
+                        <td>{{ form["intro"].astigmatism_2(size=4) }}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>{{ form["intro"].coma_1.label  }}</td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td>{{ form["intro"].coma_1(size=4) }}</td>
+                        <td>{{ form["intro"].coma_2(size=4) }}</td>
+                        <td>{{ form["intro"].coma_3(size=4) }}</td>
+                        <td>{{ form["intro"].coma_4(size=4) }}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>{{ form["intro"].higher_order.label }}</td>
+                  <td>{{ form["intro"].higher_order(size=5) }}</td>
+                </tr>
+                <tr>
+                  <td><input type="submit" name="btn" value="Compute Aberrations"></td>
+                </tr>
+              </table>
+            </form>
+          </td>
+
+          {% if result["intro"] != None %}
+          <td>
+            <img src="{{ result['intro'][0] }}" width="400" height="200">
+          </td>
+
+          <td>
+            <img src="{{ result['intro'][1] }}" width="400" height="200">
+          </td>
+          {% endif %}
+
+        </tr>
+      </table>
+    </div>
+
+    <div class = "Defocus">
+      <h3>Defocus:</h3>
+      <form method=post action="" enctype="multipart/form-data">
+        <table>
+          <tr>
+            <td>
+              <table>
+                <tr>
+                  <td>{{ form["defocus"].filename.label }}</td>
+                  <td>{{ form["defocus"].filename(size=20) }}</td>
+                </tr>
+                <tr>
+                  <td>Defocus Range</td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td>{{ form["defocus"].start.label }}</td>
+                        <td>{{ form["defocus"].stop.label }}</td>
+                        <td>{{ form["defocus"].step.label}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ form["defocus"].start(size=4) }}</td>
+                        <td>{{ form["defocus"].stop(size=4) }}</td>
+                        <td>{{ form["defocus"].step(size=4) }}</td>
+                      </tr>
+                    </table> 
+                  </td>
+                </tr>
+                <tr>
+                  <td>{{ form["defocus"].letter_size.label }}</td>
+                  <td>
+                    <table>
+                      <tr>
+                        <td>20/</td>
+                        <td>{{ form["defocus"].letter_size(size=4) }}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="submit" name="btn" value="Compute Defocused Letters"></td></form>
+                </tr>
+              </table>
+            </td>
+            {% if result["defocus"] != None %}
+            <td>
+              <img src="{{ result['defocus'] }}" width="600" height="300">
+            </td>
+            {% endif %}
+          </tr>
+        </table>
+
+    </div>
+
+    <div class ="Pupil Size">
+      <h3>Pupil Size:</h3>
+    </div>
+
+  </body>
+</html>
+
